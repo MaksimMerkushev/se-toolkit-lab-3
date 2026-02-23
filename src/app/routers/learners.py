@@ -28,7 +28,12 @@ router = APIRouter()
 #     return await <db_read_function>(session, <query_param>)
 #
 # Reference:
-# items GET -> reads from items table, returns list[Item]
+@router.get("/", response_model=list[Learner])
+async def get_learners(
+    enrolled_after: datetime | None = None,
+    session: AsyncSession = Depends(get_session),
+) -> list[Learner]:
+    return await read_learners(session=session, enrolled_after=enrolled_after)# items GET -> reads from items table, returns list[Item]
 # learners GET -> reads from learners table, returns list[Learner]
 # Query parameter: ?enrolled_after= filters learners by enrolled_at date
 
