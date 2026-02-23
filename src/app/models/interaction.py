@@ -25,3 +25,5 @@ class InteractionModel(SQLModel):
     item_id: int
     kind: str
     created_at: datetime  # BUG: should be 'created_at' to match the database column
+
+#lol
