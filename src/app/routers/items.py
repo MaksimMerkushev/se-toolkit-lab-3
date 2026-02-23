@@ -11,7 +11,7 @@ from app.models.item import ItemCreate, ItemRecord, ItemUpdate
 router = APIRouter()
 
 
-@router.get("/", response_model=list[ItemRecord])
+@router.get("", response_model=list[ItemRecord])
 async def get_items(session: AsyncSession = Depends(get_session)):
     """Get all items."""
     return await read_items(session)
