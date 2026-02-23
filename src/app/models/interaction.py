@@ -28,3 +28,4 @@ class InteractionModel(SQLModel):
 
 #lol
 #final fix
+# Final victory for issue 10
