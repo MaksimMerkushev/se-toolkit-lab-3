@@ -2,14 +2,14 @@
 
 from fastapi import APIRouter
 
-# from datetime import datetime
-#
-# from fastapi import Depends
-# from sqlmodel.ext.asyncio.session import AsyncSession
-#
-# from app.database import get_session
-# from app.db.learners import read_learners, create_learner
-# from app.models.learner import Learner, LearnerCreate
+from datetime import datetime
+
+from fastapi import Depends
+from sqlmodel.ext.asyncio.session import AsyncSession
+
+from app.database import get_session
+from app.db.learners import read_learners, create_learner
+from app.models.learner import Learner, LearnerCreate
 
 router = APIRouter()
 
@@ -17,8 +17,13 @@ router = APIRouter()
 # PART A: GET endpoint
 # ===
 
-# UNCOMMENT AND FILL IN
-#
+@router.get("/", response_model=list[Learner])
+async def get_learners(
+    enrolled_after: datetime | None = None,
+    session: AsyncSession = Depends(get_session),
+) -> list[Learner]:
+    return await read_learners(session=session, enrolled_after=enrolled_after)
+
 # @router.<method>("/<resource_name>", response_model=list[<resource_schema>])
 # async def <function_name>(
 #     <query_param>: <type> = None,
@@ -27,17 +32,20 @@ router = APIRouter()
 #     """<docstring>"""
 #     return await <db_read_function>(session, <query_param>)
 #
-# Reference:
-# items GET -> reads from items table, returns list[Item]
+# Reference:@router.get("/", response_model=list[Learner])
 # learners GET -> reads from learners table, returns list[Learner]
 # Query parameter: ?enrolled_after= filters learners by enrolled_at date
 
-# ===
-# PART B: POST endpoint
+# === PART B: POST endpoint
 # ===
 
 # UNCOMMENT AND FILL IN
-#
+@router.post("/", status_code=201, response_model=Learner)
+async def post_learner(
+    learner: LearnerCreate,
+    session: AsyncSession = Depends(get_session),
+) -> Learner:
+    return await create_learner(session=session, name=learner.name, email=learner.email)
 # @router.<method>("/<resource_name>", response_model=<resource_schema>, status_code=<status_code>)
 # async def <function_name>(
 #     <param_name>: <request_schema>,
