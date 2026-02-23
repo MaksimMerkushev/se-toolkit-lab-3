@@ -27,3 +27,4 @@ class InteractionModel(SQLModel):
     created_at: datetime  # BUG: should be 'created_at' to match the database column
 
 #lol
+#2
