@@ -40,12 +40,12 @@ async def get_learners(
 # ===
 
 # UNCOMMENT AND FILL IN
-#@router.post("/", status_code=201, response_model=Learner)
-#async def post_learner(
-#    learner: LearnerCreate,
-#    session: AsyncSession = Depends(get_session),
-#) -> Learner:
-#    return await create_learner(session=session, name=learner.name, email=learner.email)
+@router.post("/", status_code=201, response_model=Learner)
+async def post_learner(
+    learner: LearnerCreate,
+    session: AsyncSession = Depends(get_session),
+) -> Learner:
+    return await create_learner(session=session, name=learner.name, email=learner.email)
 # @router.<method>("/<resource_name>", response_model=<resource_schema>, status_code=<status_code>)
 # async def <function_name>(
 #     <param_name>: <request_schema>,
